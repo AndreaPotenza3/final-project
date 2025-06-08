@@ -13,6 +13,7 @@
             <h1>[[*{name}]]</h1>
             <p>[[*{description}]]</p>
             <p>[[*{publicationDate}]]</p>
+            <img th:src="@{/images/{img}(img=*{image})}" alt="">
         </div>
          <ul th:each="platform : *{platforms}">
             <li th:text="${platform.name}"></li>

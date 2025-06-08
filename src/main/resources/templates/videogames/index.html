@@ -11,6 +11,7 @@
         <ul th:each="videogame : ${videogames}">
             <li th:text="${videogame.name}"></li>
             <li><form th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
+                    <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block>
                     <button class="btn btn-danger" type="submit">Elimina</button>
                 </form>
             </li>
