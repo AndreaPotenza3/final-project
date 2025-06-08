@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.exam.java.project.final_project.model.Platform;
-import org.exam.java.project.final_project.model.Videogame;
 import org.exam.java.project.final_project.service.PlatformService;
-import org.exam.java.project.final_project.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
