@@ -7,17 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <main th:object="${videogame}">
-
-        <div th:object="${videogame}">
-            <h1>[[*{name}]]</h1>
-            <p>[[*{description}]]</p>
-            <p>[[*{publicationDate}]]</p>
-            <img th:src="@{/images/{img}(img=*{image})}" alt="">
+    <main>
+        <div class="container" th:object="${videogame}">
+            <div class="row" th:object="${videogame}">
+                <h1 class="text-center my-3">[[*{name}]]</h1>
+                <img class="fixed-img-show" th:src="@{/images/{img}(img=*{image})}" alt="">
+                <p class="my-3">[[*{description}]]</p>
+                <p><strong>Data di pubblicazione:</strong> [[*{publicationDate}]]</p>
+            </div>
+            <h3>Piattaforme supportate</h3>
+             <ul th:each="platform : *{platforms}">
+                <li th:text="${platform.name}"></li>
+            </ul>
+            <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-primary')}"></th:block>
         </div>
-         <ul th:each="platform : *{platforms}">
-            <li th:text="${platform.name}"></li>
-        </ul>
     </main>
     
 </body>

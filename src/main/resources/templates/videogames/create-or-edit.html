@@ -32,17 +32,13 @@
         </div>
       </div>
       <div class="mb-2">
-        <label class="form-label" for="publicationDate">Descrizione</label>
+        <label class="form-label" for="publicationDate">Data di pubblicazione</label>
         <input type="date" class="form-control" id="publicationDate" th:field="*{publicationDate}" th:errorClass="is-invalid"></input>
         <div class="invalid-feedback" th:if="${#fields.hasErrors('publicationDate')}">
           <ul>
             <li th:each="error : ${#fields.errors('publicationDate')}" th:text="${error}"></li>
           </ul>
         </div>
-      </div>
-      <div>
-        <input class="btn btn-primary" type="submit" value="Aggiungi videogioco">
-        <input class="btn btn-warning" type="reset" value="Resetta i campi">
       </div>
       <div class="mb-2">
         <label class="form-label">Piattaforme</label>
@@ -51,8 +47,13 @@
           <label class="form-check-label" th:for="|platform-${platform.id}|" th:text="${platform.name}"></label>
         </div>
       </div>
+      <div>
+        <input class="btn btn-primary" type="submit" value="Aggiungi videogioco">
+        <input class="btn btn-warning" type="reset" value="Resetta i campi">
+      </div>
 
     </form>
+    <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-primary mt-2')}"></th:block>
   </div>
 </main>
 </body>

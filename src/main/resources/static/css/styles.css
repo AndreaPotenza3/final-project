@@ -5,3 +5,8 @@
 
 }
 
+.fixed-img-show{
+  max-height: 450px;
+  object-fit: fill;
+}
+
