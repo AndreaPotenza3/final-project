@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <th:block th:replace="~{fragments/style :: head-styles}"></th:block>
+  <title>Crea Videogioco</title>
+</head>
+<body>
+<main>
+  <div class="container">
+    <h1 th:text="'Crea il tuo videogioco'"></h1>
+    <form id="platform-form" th:action="${edit} ? @{/platforms/edit/{id}(id=${platform.id})} : @{/platforms/create}" th:object="${platform}" method="post">
+      
+      <div class="mb-2">
+        <label class="form-label" for="name">Nome</label>
+        <input class="form-control" type="text" id="name" th:field="*{name}" th:errorClass="is-invalid">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+          <ul>
+            <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <input class="btn btn-primary" type="submit" value="Aggiungi videogioco">
+        <input class="btn btn-warning" type="reset" value="Resetta i campi">
+      </div>
+
+    </form>
+  </div>
+</main>
+</body>
+</html>

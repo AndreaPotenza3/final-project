@@ -3,6 +3,7 @@ package org.exam.java.project.final_project.controllers;
 import java.util.List;
 
 import org.exam.java.project.final_project.model.Videogame;
+import org.exam.java.project.final_project.service.PlatformService;
 import org.exam.java.project.final_project.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class VideogameController {
 
     @Autowired
     private VideogameService videogameService;
+
+    @Autowired
+    private PlatformService platformService;
 
     @GetMapping
     public String index(@RequestParam(name = "name", required = false) String name, Model model) {
@@ -48,6 +52,7 @@ public class VideogameController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("videogame", new Videogame());
+        model.addAttribute("platforms", platformService.findAll());
         return "videogames/create-or-edit";
     }
 

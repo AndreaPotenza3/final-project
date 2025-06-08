@@ -84,8 +84,6 @@ public class Videogame {
         this.publicationDate = publicationDate;
     }
 
-
-
     public List<Platform> getPlatforms() {
         return this.platforms;
     }

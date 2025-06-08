@@ -3,7 +3,6 @@ package org.exam.java.project.final_project.controllers;
 import java.util.List;
 
 import org.exam.java.project.final_project.model.Platform;
-import org.exam.java.project.final_project.model.Videogame;
 import org.exam.java.project.final_project.service.PlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,7 +72,7 @@ public class PlatformController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
-        platformService.deleteById(id);;
+        platformService.delete(id);;
         
         return "redirect:/platforms";
     }

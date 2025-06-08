@@ -40,25 +40,16 @@
           </ul>
         </div>
       </div>
-      <div class="mb-2">
-  <label class="form-label" for="category">Categoria</label>
-  <select class="form-control" id="category" th:field="*{category}" th:errorClass="is-invalid">
-    <option value="" disabled selected>Seleziona una categoria</option>
-    <option value="Action">Action</option>
-    <option value="Adventure">Adventure</option>
-    <option value="RPG">RPG</option>
-    <option value="Sports">Sports</option>
-  </select>
-  <div class="invalid-feedback" th:if="${#fields.hasErrors('category')}">
-      <ul>
-        <li th:each="err : ${#fields.errors('category')}" th:text="${err}"></li>
-      </ul>
-    </div>
-  </div>
-
       <div>
         <input class="btn btn-primary" type="submit" value="Aggiungi videogioco">
         <input class="btn btn-warning" type="reset" value="Resetta i campi">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Piattaforme</label>
+        <div class="form-check" th:each="platform : ${platforms}">
+          <input class="form-check-input" type="checkbox" th:field="${videogame.platforms}" th:value="${platform.id}" th:id="|platform-${platform.id}|">
+          <label class="form-check-label" th:for="|platform-${platform.id}|" th:text="${platform.name}"></label>
+        </div>
       </div>
 
     </form>
