@@ -39,6 +39,7 @@ public class VideogameController {
 
         model.addAttribute("videogames", videogames);
         model.addAttribute("name", name);
+        model.addAttribute("platforms", platformService.findAll());
         return "videogames/index";
     }
 
@@ -68,6 +69,7 @@ public class VideogameController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("videogame", videogameService.getById(id));
+        model.addAttribute("edit", true);
         return "videogames/create-or-edit";
     }
 

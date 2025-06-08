@@ -9,7 +9,7 @@
 <body>
 <main>
   <div class="container">
-    <h1 th:text="'Crea il tuo videogioco'"></h1>
+    <h1 th:text="${edit} ? 'Modifica ' + ${videogame.name} : 'Crea il tuo videogioco'"></h1>
     <form id="videogame-form" th:action="${edit} ? @{/videogames/edit/{id}(id=${videogame.id})} : @{/videogames/create}" th:object="${videogame}" method="post">
       
       <div class="mb-2">
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div>
-        <input class="btn btn-primary" type="submit" value="Aggiungi videogioco">
+        <input class="btn btn-primary" type="submit" value="Salva">
         <input class="btn btn-warning" type="reset" value="Resetta i campi">
       </div>
 

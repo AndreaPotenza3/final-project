@@ -7,6 +7,9 @@
         <title>Document</title>
     </head>
     <body>
+        <header class="navbar">
+            <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
+        </header>
         <main>
             <div class="container">
                 <h1 class="text-center my-3">Tutti i videogiochi</h1>
@@ -24,8 +27,6 @@
                                     <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block>
                                     <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}"></th:block>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}">Cancella</button>
-
-                                    <!-- <button class="btn btn-danger" type="submit">Elimina</button> -->
                                 </form>
                                 <!-- Modal -->
                                 <div class="modal fade" th:id="'delete-modal-' + ${videogame.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,6 +55,6 @@
             </div>
         </main>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>
