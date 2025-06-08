@@ -8,14 +8,16 @@
 </head>
 </head>
 <body>
-    <ul th:each="platform : ${platforms}" th:object="${platform}">
-        <li>[[*{name}]]</li>
-        <li><form th:action="@{/platforms/delete/{id}(id=${platform.id})}" method="post">
-                <button class="btn btn-danger" type="submit">Elimina</button>
-            </form>
-        </li>
-    </ul>
-    <ul></ul>
-    
+    <div class="container">
+        <div class="row">
+            <ul th:each="platform : ${platforms}" th:object="${platform}">
+                <li>[[*{name}]]</li>
+                <li><form th:action="@{/platforms/delete/{id}(id=${platform.id})}" method="post">
+                        <button class="btn btn-danger" type="submit">Elimina</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

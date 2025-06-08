@@ -1,0 +1,7 @@
+.fixed-img {   
+  object-fit: cover; 
+  height: 250px;
+  object-position: center;
+
+}
+
