@@ -88,6 +88,16 @@ public class Videogame {
     }
 
 
+    public LocalDate getPublicationDate() {
+        return this.publicationDate;
+    }
+
+    public void setPublicationDate(LocalDate publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+
+
     public List<Platform> getPlatforms() {
         return this.platforms;
     }
