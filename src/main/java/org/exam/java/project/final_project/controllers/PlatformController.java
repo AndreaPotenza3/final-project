@@ -37,6 +37,8 @@ public class PlatformController {
     public String show(@PathVariable("id") Integer id, Model model) {
         Platform platform = platformService.getById(id);
         model.addAttribute("platform",platform);
+        model.addAttribute("platforms", platformService.findAll());
+        model.addAttribute("videogames", platform.getVideogames());
         return "platforms/show";
     }
 
@@ -52,12 +54,13 @@ public class PlatformController {
             return "platforms/create-or-edit";
         }
         platformService.create(formPlatform);
-        return "redirect:/platforms";
+        return "redirect:/videogames";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("platform", platformService.getById(id));
+        model.addAttribute("edit", true);
         return "platforms/create-or-edit";
     }
 
@@ -67,7 +70,7 @@ public class PlatformController {
             return "platforms/create-or-edit";
         }
         platformService.update(formPlatform);
-        return "redirect:/platforms";
+        return "redirect:/platforms/{id}";
     }
 
     @PostMapping("/delete/{id}")

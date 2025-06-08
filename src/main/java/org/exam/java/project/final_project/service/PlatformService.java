@@ -28,6 +28,10 @@ public class PlatformService {
         return platformAttempt.get();
     }
 
+    public Optional<Platform> findById(Integer id) {
+        return platformRepository.findById(id);
+    }
+
     public Platform create(Platform platform) {
         return platformRepository.save(platform);
     }

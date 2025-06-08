@@ -7,7 +7,7 @@
         <title>Document</title>
     </head>
     <body>
-        <header class="navbar">
+        <header>
             <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
         </header>
         <main>
@@ -28,7 +28,6 @@
                                     <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}"></th:block>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}">Cancella</button>
                                 </form>
-                                <!-- Modal -->
                                 <div class="modal fade" th:id="'delete-modal-' + ${videogame.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

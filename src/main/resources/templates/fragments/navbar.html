@@ -8,17 +8,15 @@
 <body>
     <header>
         <th:block th:fragment="navbar">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        Piattaforme
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li th:each="platform : ${platforms}"><a class="dropdown-item" th:href="@{/platforms/{id}(id=${platform.id})}" th:text="${platform.name}"></a></li>
+            <nav class="navbar navbar-expand-lg bg-light w-100">
+                <div>
+                    <a class="nav-link px-2" th:href="@{/videogames}">Videogames</a>
+                </div>
+                <div class="container">
+                    <ul class="navbar-nav mx-auto">
+                    <li class="nav-item mx-4" th:each="platform : ${platforms}">
+                        <a class="nav-link" th:href="@{/platforms/{id}(id=${platform.id})}" th:text="${platform.name}"></a>
+                    </li>
                     </ul>
                 </div>
             </nav>

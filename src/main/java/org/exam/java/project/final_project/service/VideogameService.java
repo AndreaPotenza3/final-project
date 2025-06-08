@@ -30,6 +30,10 @@ public class VideogameService {
         return videogameAttempt.get();
     }
 
+    public Optional<Videogame> findById(Integer id) {
+        return videogameRepository.findById(id);
+    }
+
     public Videogame create(Videogame videogame) {
         return videogameRepository.save(videogame);
     }
