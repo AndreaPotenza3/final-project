@@ -36,9 +36,6 @@ public class Videogame {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "category", nullable = false)
-    private String category;
-
     @NotNull
     @Column(name = "publication_date")
     private LocalDate publicationDate;
@@ -78,15 +75,6 @@ public class Videogame {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public String getCategory() {
-        return this.category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
 
     public LocalDate getPublicationDate() {
         return this.publicationDate;

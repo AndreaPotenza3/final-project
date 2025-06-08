@@ -31,6 +31,30 @@
           </ul>
         </div>
       </div>
+      <div class="mb-2">
+        <label class="form-label" for="publicationDate">Descrizione</label>
+        <input type="date" class="form-control" id="publicationDate" th:field="*{publicationDate}" th:errorClass="is-invalid"></input>
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('publicationDate')}">
+          <ul>
+            <li th:each="error : ${#fields.errors('publicationDate')}" th:text="${error}"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mb-2">
+  <label class="form-label" for="category">Categoria</label>
+  <select class="form-control" id="category" th:field="*{category}" th:errorClass="is-invalid">
+    <option value="" disabled selected>Seleziona una categoria</option>
+    <option value="Action">Action</option>
+    <option value="Adventure">Adventure</option>
+    <option value="RPG">RPG</option>
+    <option value="Sports">Sports</option>
+  </select>
+  <div class="invalid-feedback" th:if="${#fields.hasErrors('category')}">
+      <ul>
+        <li th:each="err : ${#fields.errors('category')}" th:text="${err}"></li>
+      </ul>
+    </div>
+  </div>
 
       <div>
         <input class="btn btn-primary" type="submit" value="Aggiungi videogioco">

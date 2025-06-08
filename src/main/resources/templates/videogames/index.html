@@ -9,7 +9,12 @@
 <body>
     <ul th:each="videogame : ${videogames}" th:object="${videogame}">
         <li>[[*{name}]]</li>
+        <li><form th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
+                <button class="btn btn-danger" type="submit">Elimina</button>
+            </form>
+        </li>
     </ul>
+    
     
 </body>
 </html>
