@@ -3,7 +3,7 @@ package org.exam.java.project.final_project.controllers;
 import java.util.List;
 
 import org.exam.java.project.final_project.model.Videogame;
-import org.exam.java.project.final_project.repository.VideogameRepository;
+import org.exam.java.project.final_project.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,15 +22,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class VideogameController {
 
     @Autowired
-    private VideogameRepository repository;
+    private VideogameService videogameService;
 
     @GetMapping
     public String index(@RequestParam(name = "name", required = false) String name, Model model) {
         List<Videogame> videogames;
         if(name != null && !name.isBlank()) {
-            videogames = repository.findByNameContainingIgnoreCase(name);
+            videogames = videogameService.findByInName(name);
         } else {
-            videogames = repository.findAll();
+            videogames = videogameService.findAll();
         }
 
         model.addAttribute("videogames", videogames);
@@ -40,7 +40,7 @@ public class VideogameController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Integer id, Model model) {
-        Videogame videogame = repository.findById(id).get();
+        Videogame videogame = videogameService.getById(id);
         model.addAttribute("videogame",videogame);
         return "videogames/show";
     }
@@ -48,36 +48,36 @@ public class VideogameController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("videogame", new Videogame());
-        return "videogames/create";
+        return "videogames/create-or-edit";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("videogame") Videogame formVideogame, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
-            return "videogames/create";
+            return "videogames/create-or-edit";
         }
-        repository.save(formVideogame);
+        videogameService.create(formVideogame);
         return "redirect:/videogames";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("videogame", repository.findById(id).get());
-        return "videogames/edit";
+        model.addAttribute("videogame", videogameService.getById(id));
+        return "videogames/create-or-edit";
     }
 
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("videogame") Videogame formVideogame, BindingResult bindingResult, Model model) {
          if(bindingResult.hasErrors()) {
-            return "videogames/create";
+            return "videogames/create-or-edit";
         }
-        repository.save(formVideogame);
+        videogameService.update(formVideogame);
         return "redirect:/videogames";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
-        repository.deleteById(id);
+        videogameService.deleteById(id);;
         
         return "redirect:/videogames";
     }
