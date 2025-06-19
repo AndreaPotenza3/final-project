@@ -6,7 +6,7 @@
         <th:block th:replace="~{fragments/style :: head-styles}"></th:block>
         <title>Document</title>
     </head>
-    <body>
+    <body class="bg-secondary">
         <header>
             <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
         </header>
@@ -16,9 +16,9 @@
                 <div class="row g-3 mb-2">
                     <th:block th:replace="~{fragments/buttons :: button('Aggiungi un nuovo gioco', @{/videogames/create}, 'btn btn-primary')}"></th:block>
                     <div class="col-4" th:each="videogame : ${videogames}">
-                        <div class="card h-100 p-0" >
+                        <div class="card h-100 p-0 bg-secondary" >
                                 <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">
-                            <div class="card-body card-body-new">
+                            <div class="card-body card-body-new text-white bg-opacity-75">
                                 <h5 class="card-title mt-auto" th:text="${videogame.name}"></h5>
                                 <ul class="list-group list-group-horizontal flex-wrap">
                                     <li class="list-group-item " th:each="platform : ${videogame.platforms}" th:text="${platform.name}"></li>

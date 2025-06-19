@@ -8,14 +8,14 @@
 <body>
     <header>
         <th:block th:fragment="navbar">
-            <nav class="navbar navbar-expand-lg bg-light w-100">
-                <div>
-                    <a class="nav-link px-2" th:href="@{/videogames}">Videogames</a>
-                </div>
-                <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light w-100 bg-dark text-white bg-opacity-75">
+                <div class="container-fluid">
+                    <div>
+                        <a class="nav-link px-2" th:href="@{/videogames}">Videogames</a>
+                    </div>
                     <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-4" th:each="platform : ${platforms}">
-                        <a class="nav-link" th:href="@{/platforms/{id}(id=${platform.id})}" th:text="${platform.name}"></a>
+                        <a class="nav-link text-white plat-link" th:href="@{/platforms/{id}(id=${platform.id})}" th:text="${platform.name}"></a>
                     </li>
                     </ul>
                 </div>

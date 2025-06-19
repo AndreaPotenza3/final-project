@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +47,8 @@ public class Videogame {
     private LocalDate publicationDate;
 
     @ManyToMany
+    @JsonIgnoreProperties("videogames")
+    // @JsonManagedReference
     @JoinTable(name = "platform_videogame", joinColumns = @JoinColumn(name = "videogame_id"), inverseJoinColumns = @JoinColumn(name = "platform_id"))
     private List<Platform> platforms;
 
