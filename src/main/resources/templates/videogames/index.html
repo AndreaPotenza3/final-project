@@ -12,43 +12,44 @@
         </header>
         <main>
             <div class="container">
-                <h1 class="text-center my-3">Tutti i videogiochi</h1>
+                <h1 class="text-center my-3">Tutti i Videogiochi</h1>
                 <div class="row g-3 mb-2">
                     <th:block th:replace="~{fragments/buttons :: button('Aggiungi un nuovo gioco', @{/videogames/create}, 'btn btn-primary')}"></th:block>
                     <div class="col-4" th:each="videogame : ${videogames}">
-                        <div class="card h-100 p-0 bg-secondary" >
-                                <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">
-                            <div class="card-body card-body-new text-white bg-opacity-75">
-                                <h5 class="card-title mt-auto" th:text="${videogame.name}"></h5>
-                                <ul class="list-group list-group-horizontal flex-wrap">
-                                    <li class="list-group-item " th:each="platform : ${videogame.platforms}" th:text="${platform.name}"></li>
-                                </ul>
-                                <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
-                                    <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block>
-                                    <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}"></th:block>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}">Cancella</button>
-                                </form>
-                                <div class="modal fade" th:id="'delete-modal-' + ${videogame.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cancellazione "[[${videogame.name}]]"</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <a th:href="@{/videogames/{id}(id=${videogame.id})}" class="text-decoration-none text-dark">
+                            <div class="card h-100 p-0 bg-secondary" >
+                                    <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">
+                                <div class="card-body card-body-new text-white bg-opacity-75">
+                                    <h5 class="card-title mt-auto" th:text="${videogame.name}"></h5>
+                                    <ul class="list-group list-group-horizontal flex-wrap">
+                                        <li class="list-group-item " th:each="platform : ${videogame.platforms}" th:text="${platform.name}"></li>
+                                    </ul>
+                                    <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
+                                        <!-- <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block> -->
+                                        <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}"></th:block>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}">Cancella</button>
+                                    </form>
+                                    <div class="modal fade" th:id="'delete-modal-' + ${videogame.id}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" th:attr="aria-labelledby='modalLabel-' + ${videogame.id}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-dark" th:id="modalLabel">Cancellazione "[[${videogame.name}]]"</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-dark" th:text="'Vuoi veramente cancellare \'' + ${videogame.name} + '\' ?'">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="#" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
+                                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                            </form>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                        </div>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        Vuoi veramente cancellare "[[${videogame.name}]]"
                                     </div>
-                                    <div class="modal-footer">
-                                        <form action="#" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
-                                            <button type="submit" class="btn btn-danger">Elimina</button>
-                                        </form>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
