@@ -15,7 +15,7 @@
                 <h1 class="text-center my-3">Tutti i Videogiochi</h1>
                 <div class="row g-3 mb-2">
                     <th:block th:replace="~{fragments/buttons :: button('Aggiungi un nuovo gioco', @{/videogames/create}, 'btn btn-primary')}"></th:block>
-                    <div class="col-4" th:each="videogame : ${videogames}">
+                    <div class="col-4 card-link" th:each="videogame : ${videogames}">
                         <a th:href="@{/videogames/{id}(id=${videogame.id})}" class="text-decoration-none text-dark">
                             <div class="card h-100 p-0 bg-secondary" >
                                     <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">

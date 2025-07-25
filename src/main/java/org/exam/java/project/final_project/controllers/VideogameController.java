@@ -47,6 +47,7 @@ public class VideogameController {
     public String show(@PathVariable("id") Integer id, Model model) {
         Videogame videogame = videogameService.getById(id);
         model.addAttribute("videogame",videogame);
+        model.addAttribute("platforms", platformService.findAll());
         return "videogames/show";
     }
 

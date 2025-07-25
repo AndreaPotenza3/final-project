@@ -15,8 +15,8 @@
   transform: scale(1.1); 
 }
 
-/* .card-link:hover {
+.card-link:hover {
   transition: transform 0.2s;
   transform: scale(1.025);
-} */
+}
 

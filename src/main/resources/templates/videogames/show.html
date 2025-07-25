@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body class="bg-secondary">
+    <header>
+        <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
+    </header>
     <main>
         <div class="container" th:object="${videogame}">
             <div class="row" th:object="${videogame}">
