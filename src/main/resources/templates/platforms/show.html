@@ -27,8 +27,8 @@
                                     </ul> -->
                                     <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
                                         <!-- <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block> -->
-                                        <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}"></th:block>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}">Cancella</button>
+                                        <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}" sec:authorize="hasAnyAuthority('USER', 'ADMIN')"></th:block>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}" sec:authorize="hasAuthority('ADMIN')">Cancella</button>
                                     </form>
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ import org.exam.java.project.final_project.model.Videogame;
 import org.exam.java.project.final_project.service.PlatformService;
 import org.exam.java.project.final_project.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +30,7 @@ public class VideogameController {
     private PlatformService platformService;
 
     @GetMapping
-    public String index(@RequestParam(name = "name", required = false) String name, Model model) {
+    public String index(@RequestParam(name = "name", required = false) String name, Authentication authentication, Model model) {
         List<Videogame> videogames;
         if(name != null && !name.isBlank()) {
             videogames = videogameService.findByInName(name);
@@ -40,6 +41,7 @@ public class VideogameController {
         model.addAttribute("videogames", videogames);
         model.addAttribute("name", name);
         model.addAttribute("platforms", platformService.findAll());
+        model.addAttribute("username", authentication.getName());
         return "videogames/index";
     }
 

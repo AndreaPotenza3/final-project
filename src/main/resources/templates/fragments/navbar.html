@@ -11,13 +11,18 @@
             <nav class="navbar navbar-expand-lg bg-light w-100 bg-dark text-white bg-opacity-75">
                 <div class="container-fluid">
                     <div>
-                        <a class="nav-link" th:href="@{/videogames}">Videogames</a>
+                        <a class="plat-link nav-link" th:href="@{/videogames}">Videogames</a>
                     </div>
                     <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-4" th:each="platform : ${platforms}">
                         <a class="nav-link text-white plat-link" th:href="@{/platforms/{id}(id=${platform.id})}" th:text="${platform.name}"></a>
                     </li>
                     </ul>
+                    <div class="d-flex">
+                        <span class="pe-1" sec:authentication="name"></span>
+                        <span class="pe-3" sec:authentication="principal.authorities"></span>
+                        <a class="nav-link plat-link" href="/logout">Esci</a>
+                    </div>
                 </div>
             </nav>
         </th:block>

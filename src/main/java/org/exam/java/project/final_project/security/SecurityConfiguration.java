@@ -20,9 +20,9 @@ public class SecurityConfiguration {
     @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-        .requestMatchers("/videogames/create", "/videogames/edit/**").hasAuthority("ADMIN")
+        .requestMatchers("/videogames/create", "/videogames/edit/**").hasAnyAuthority("ADMIN", "USER")
         .requestMatchers(HttpMethod.POST, "videogames/**").hasAuthority("ADMIN")
-        .requestMatchers("/platforms", "/platforms/**").hasAuthority("ADMIN")
+        .requestMatchers("/platforms", "/platforms/**").hasAnyAuthority("ADMIN", "USER")
         .requestMatchers("/videogames", "/videogames/**").hasAnyAuthority("USER", "ADMIN")
         .requestMatchers("/**").permitAll()
         .and().formLogin()
