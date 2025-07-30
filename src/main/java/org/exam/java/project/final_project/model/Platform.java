@@ -30,7 +30,6 @@ public class Platform {
     @JsonIgnoreProperties("platforms")
     @ManyToMany(mappedBy = "platforms")
     private List<Videogame> videogames;
-    
 
     public Integer getId() {
         return this.id;
@@ -47,7 +46,6 @@ public class Platform {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public List<Videogame> getVideogames() {
         return this.videogames;

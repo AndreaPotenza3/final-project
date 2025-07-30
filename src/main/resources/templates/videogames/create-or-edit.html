@@ -29,10 +29,11 @@
             </ul>
           </div>
         </div>
-        <!-- <div class="mb-2">
+        <div class="mb-2">
           <label class="form-label" for="image">Immagine</label>
-          <input class="form-control" type="file" id="image" name="image" accept="image/*">
-        </div> -->
+          <input class="form-control" type="file" id="uploadImage" name="uploadImage" accept="image/*" th:if="${edit}"
+            th:required="true">
+        </div>
         <div class="mb-2">
           <label class="form-label fw-bold" for="description">Descrizione</label>
           <textarea class="form-control" id="description" th:field="*{description}"

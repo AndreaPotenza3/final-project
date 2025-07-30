@@ -19,13 +19,14 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "videogames")
 public class Videogame {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -43,6 +44,7 @@ public class Videogame {
     private String image;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "publication_date")
     private LocalDate publicationDate;
 
@@ -76,6 +78,7 @@ public class Videogame {
         this.description = description;
     }
 
+    @Transient
     public String getImage() {
         return this.image;
     }
@@ -99,6 +102,5 @@ public class Videogame {
     public void setPlatforms(List<Platform> platforms) {
         this.platforms = platforms;
     }
-
 
 }

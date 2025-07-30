@@ -24,7 +24,7 @@ public class VideogameService {
 
     public Videogame getById(Integer id) {
         Optional<Videogame> videogameAttempt = videogameRepository.findById(id);
-        if(videogameAttempt.isEmpty()) {
+        if (videogameAttempt.isEmpty()) {
             throw new IllegalArgumentException();
         }
         return videogameAttempt.get();
@@ -51,6 +51,4 @@ public class VideogameService {
         videogameRepository.delete(videogame);
     }
 
-
-    
 }
