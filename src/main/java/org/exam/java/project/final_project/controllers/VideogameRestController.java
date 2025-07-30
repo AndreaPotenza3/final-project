@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -31,8 +32,13 @@ public class VideogameRestController {
     private VideogameService videogameService;
 
     @GetMapping
-    public List<Videogame> index() {
-        List<Videogame> videogames = videogameService.findAll();
+    public List<Videogame> index(@RequestParam(name = "name", required = false) String name) {
+        List<Videogame> videogames;
+        if(name != null && !name.isBlank()) {
+            videogames = videogameService.findByInName(name);
+        } else {
+            videogames = videogameService.findAll();
+        }
         return videogames;
     }
 

@@ -1,69 +1,89 @@
-    <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <th:block th:replace="~{fragments/style :: head-styles}"></th:block>
-        <title>Document</title>
-    </head>
-    <body class="bg-secondary">
-        <header>
-            <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
-        </header>
-        <main>
-            <div class="container">
-                <h1 class="text-center my-3">Tutti i Videogiochi</h1>
-                <div class="row g-3 mb-2">
-                    <form th:action="@{/videogames}" method="get" class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <th:block th:replace="~{fragments/buttons :: button('Aggiungi un nuovo gioco', @{/videogames/create}, 'btn btn-outline-dark')}"></th:block>
-                            <div class="d-flex gap-1">
-                                <input type="text" class="form-control" name="name" placeholder="Cerca per nome..."
-                                    th:value="${name}" aria-label="Cerca">
-                                <button type="submit" class="btn btn-outline-dark">Cerca</button>
-                            </div>  
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/style :: head-styles}"></th:block>
+    <title>Videogames</title>
+</head>
+
+<body class="bg-secondary">
+    <header>
+        <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="text-center my-5">Tutti i Videogiochi</h1>
+            <div class="row g-3 mb-2">
+                <form th:action="@{/videogames}" method="get" class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <th:block
+                            th:replace="~{fragments/buttons :: button('Aggiungi un nuovo gioco', @{/videogames/create}, 'btn btn-dark')}">
+                        </th:block>
+                        <div class="d-flex gap-1">
+                            <input type="text" class="form-control" name="name" placeholder="Cerca per nome..."
+                                th:value="${name}" aria-label="Cerca">
+                            <button type="submit" class="btn btn-dark">Cerca</button>
                         </div>
-                    </form>
-                    <div class="col-4 card-link" th:each="videogame : ${videogames}">
+                    </div>
+                </form>
+                <div class="col-4" th:each="videogame : ${videogames}">
+                    <div class="card h-100 p-0 bg-dark border-0 card-link bg-opacity-75">
                         <a th:href="@{/videogames/{id}(id=${videogame.id})}" class="text-decoration-none text-dark">
-                            <div class="card h-100 p-0 bg-newdark border-0" >
-                                    <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">
-                                <div class="card-body card-body-new text-white bg-opacity-75">
-                                    <h5 class="card-title mt-auto text-white" th:text="${videogame.name}"></h5>
-                                    <ul class="list-group list-group-horizontal flex-wrap">
-                                        <li class="list-group-item " th:each="platform : ${videogame.platforms}" th:text="${platform.name}"></li>
-                                    </ul>
-                                    <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
-                                        <!-- <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block> -->
-                                        <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-outline-warning')}"></th:block>
-                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}" sec:authorize="hasAuthority('ADMIN')">Cancella</button>
+                            <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img"
+                                alt="...">
+                        </a>
+                        <div class="card-body card-body-new text-white bg-opacity-75">
+                            <a th:href="@{/videogames/{id}(id=${videogame.id})}" class="text-decoration-none text-dark">
+                                <h5 class="card-title mt-auto text-white" th:text="${videogame.name}"></h5>
+                                <ul class="list-group list-group-horizontal flex-wrap">
+                                    <li class="list-group-item " th:each="platform : ${videogame.platforms}"
+                                        th:text="${platform.name}"></li>
+                                </ul>
+                            </a>
+                            <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
+                                <!-- <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block> -->
+                                <th:block
+                                    th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-outline-warning')}">
+                                </th:block>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    th:data-bs-target="'#delete-modal-' + ${videogame.id}"
+                                    sec:authorize="hasAuthority('ADMIN')">Cancella</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal fade" th:id="'delete-modal-' + ${videogame.id}" tabindex="-1"
+                        aria-labelledby="modalLabel-[[${videogame.id}]]"
+                        th:attr="aria-labelledby='modalLabel-' + ${videogame.id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 text-dark" th:id="'modalLabel-' + ${videogame.id}">
+                                        Cancellazione "[[${videogame.name}]]"</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-dark"
+                                    th:text="'Vuoi veramente cancellare \'' + ${videogame.name} + '\' ?'">
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="#" th:action="@{/videogames/delete/{id}(id=${videogame.id})}"
+                                        method="post">
+                                        <button type="submit" class="btn btn-danger">Elimina</button>
                                     </form>
-                                    <div class="modal fade" th:id="'delete-modal-' + ${videogame.id}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" th:attr="aria-labelledby='modalLabel-' + ${videogame.id}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-dark" th:id="modalLabel">Cancellazione "[[${videogame.name}]]"</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-dark" th:text="'Vuoi veramente cancellare \'' + ${videogame.name} + '\' ?'">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form action="#" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
-                                                <button type="submit" class="btn btn-danger">Elimina</button>
-                                            </form>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Annulla</button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
-    
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

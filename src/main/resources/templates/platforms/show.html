@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Document</title>
 </head>
 </head>
+
 <body class="bg-secondary">
     <header>
         <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
@@ -14,29 +16,38 @@
     <main th:object="${platform}">
         <div class="container">
             <div class="row g-3 mb-2">
-                <h1 class="text-center">[[*{name}]]</h1>
-            
+                <h1 class="text-center my-5">[[*{name}]]</h1>
+
                 <div class="col-4 card-link" th:each="videogame : ${videogames}" th:if="${videogames.size() > 0}">
                     <a th:href="@{/videogames/{id}(id=${videogame.id})}" class="text-decoration-none text-dark">
-                            <div class="card h-100 p-0 bg-newdark border-0" >
-                                    <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">
-                                <div class="card-body card-body-new">
-                                    <h5 class="card-title mt-auto text-white" th:text="${videogame.name}"></h5>
-                                    <!-- <ul class="list-group list-group-horizontal flex-wrap">
+                        <div class="card h-100 p-0 bg-newdark border-0">
+                            <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img"
+                                alt="...">
+                            <div class="card-body card-body-new">
+                                <h5 class="card-title mt-auto text-white" th:text="${videogame.name}"></h5>
+                                <!-- <ul class="list-group list-group-horizontal flex-wrap">
                                         <li class="list-group-item " th:each="platform : ${videogame.platforms}" th:text="${platform.name}"></li>
                                     </ul> -->
-                                    <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}" method="post">
-                                        <!-- <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block> -->
-                                        <th:block th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-warning')}" sec:authorize="hasAnyAuthority('USER', 'ADMIN')"></th:block>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${videogame.id}" sec:authorize="hasAuthority('ADMIN')">Cancella</button>
-                                    </form>
-                                </div>
+                                <form class="mt-2" th:action="@{/videogames/delete/{id}(id=${videogame.id})}"
+                                    method="post">
+                                    <!-- <th:block th:replace="~{fragments/buttons :: button('Dettaglio', @{/videogames/{id}(id=${videogame.id})}, 'btn btn-primary')}"></th:block> -->
+                                    <th:block
+                                        th:replace="~{fragments/buttons :: button('Modifica', @{/videogames/edit/{id}(id=${videogame.id})}, 'btn btn-outline-warning')}"
+                                        sec:authorize="hasAnyAuthority('USER', 'ADMIN')"></th:block>
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                        th:data-bs-target="'#delete-modal-' + ${videogame.id}"
+                                        sec:authorize="hasAuthority('ADMIN')">Cancella</button>
+                                </form>
                             </div>
+                        </div>
                     </a>
                 </div>
-                <p class="text-center fs-3 mt-5" th:text="'Non ci sono giochi disponibili per questa piattaforma!'" th:unless="${videogames.size() > 0}"></p>
+
+                <p class="text-center fs-3 mt-5" th:text="'Non ci sono giochi disponibili per questa piattaforma!'"
+                    th:unless="${videogames.size() > 0}"></p>
             </div>
         </div>
     </main>
 </body>
+
 </html>

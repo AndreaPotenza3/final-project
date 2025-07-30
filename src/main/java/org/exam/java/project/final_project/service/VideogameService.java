@@ -19,7 +19,7 @@ public class VideogameService {
     }
 
     public List<Videogame> findByInName(String name) {
-        return videogameRepository.findByNameContainingIgnoreCase(name);
+        return videogameRepository.findByNameContainingIgnoreCase(name.trim());
     }
 
     public Videogame getById(Integer id) {

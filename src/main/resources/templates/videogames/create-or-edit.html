@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <th:block th:replace="~{fragments/style :: head-styles}"></th:block>
   <title>Crea Videogioco</title>
 </head>
-<body class="bg-secondary">
-<main>
-  <div class="container">
-    <h1 th:text="${edit} ? 'Modifica ' + ${videogame.name} : 'Crea il tuo videogioco'"></h1>
-    <form id="videogame-form" th:action="${edit} ? @{/videogames/edit/{id}(id=${videogame.id})} : @{/videogames/create}" th:object="${videogame}" method="post">
-      
-      <div class="mb-2">
-        <label class="form-label" for="name">Nome</label>
-        <input class="form-control" type="text" id="name" th:field="*{name}" th:errorClass="is-invalid">
-        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
-          <ul>
-            <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="mb-2">
-        <label class="form-label" for="description">Descrizione</label>
-        <textarea class="form-control" id="description" th:field="*{description}" th:errorClass="is-invalid"></textarea>
-        <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
-          <ul>
-            <li th:each="error : ${#fields.errors('description')}" th:text="${error}"></li>
-          </ul>
-        </div>
-      </div>
-      <div class="mb-2">
-        <label class="form-label" for="publicationDate">Data di pubblicazione</label>
-        <input type="date" class="form-control" id="publicationDate" th:field="*{publicationDate}" th:errorClass="is-invalid"></input>
-        <div class="invalid-feedback" th:if="${#fields.hasErrors('publicationDate')}">
-          <ul>
-            <li th:each="error : ${#fields.errors('publicationDate')}" th:text="${error}"></li>
-          </ul>
-        </div>
-      </div>
-      <div class="mb-2">
-        <label class="form-label">Piattaforme</label>
-        <div class="form-check" th:each="platform : ${platforms}">
-          <input class="form-check-input" type="checkbox" th:field="${videogame.platforms}" th:value="${platform.id}" th:id="|platform-${platform.id}|">
-          <label class="form-check-label" th:for="|platform-${platform.id}|" th:text="${platform.name}"></label>
-        </div>
-      </div>
-      <div>
-        <input class="btn btn-outline-light" type="submit" value="Salva">
-        <input class="btn btn-outline-warning" type="reset" value="Resetta i campi">
-      </div>
 
-    </form>
-    <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-outline-dark mt-2')}"></th:block>
-  </div>
-</main>
+<body class="bg-secondary">
+  <main>
+    <header>
+      <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
+    </header>
+    <div class="container">
+      <h1 class="my-5 text-center" th:text="${edit} ? 'Modifica ' + ${videogame.name} : 'Aggiungi il tuo videogioco'">
+      </h1>
+      <form id="videogame-form"
+        th:action="${edit} ? @{/videogames/edit/{id}(id=${videogame.id})} : @{/videogames/create}"
+        th:object="${videogame}" method="post">
+
+        <div class="mb-2">
+          <label class="form-label fw-bold" for="name">Nome</label>
+          <input class="form-control" type="text" id="name" th:field="*{name}" th:errorClass="is-invalid">
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+            <ul>
+              <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label fw-bold" for="description">Descrizione</label>
+          <textarea class="form-control" id="description" th:field="*{description}"
+            th:errorClass="is-invalid"></textarea>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+            <ul>
+              <li th:each="error : ${#fields.errors('description')}" th:text="${error}"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-2">
+          <label class="form-label fw-bold" for="publicationDate">Data di pubblicazione</label>
+          <input type="date" class="form-control" id="publicationDate" th:field="*{publicationDate}"
+            th:errorClass="is-invalid"></input>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('publicationDate')}">
+            <ul>
+              <li th:each="error : ${#fields.errors('publicationDate')}" th:text="${error}"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-2">
+          <label class="form-label fw-bold">Piattaforme</label>
+          <div class="form-check" th:each="platform : ${platforms}">
+            <input class="form-check-input" type="checkbox" th:field="${videogame.platforms}" th:value="${platform.id}"
+              th:id="|platform-${platform.id}|">
+            <label class="form-check-label" th:for="|platform-${platform.id}|" th:text="${platform.name}"></label>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center my-3">
+          <th:block
+            th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-outline-light mx-1')}">
+          </th:block>
+          <div class="btn-group" role="group">
+            <input class="btn btn-outline-warning mx-1" type="reset" value="Reset">
+            <input class="btn btn-outline-light mx-1" type="submit" value="Salva">
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
 </body>
+
 </html>

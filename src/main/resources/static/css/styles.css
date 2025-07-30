@@ -1,18 +1,18 @@
-.fixed-img {   
-  object-fit: cover; 
+.fixed-img {
+  object-fit: cover;
   height: 250px;
   object-position: center;
 
 }
 
-.fixed-img-show{
-  max-height: 450px;
-  object-fit: fill;
+.fixed-img-show {
+  object-fit: cover;
+  aspect-ratio: 5/3;
 }
 
 .plat-link:hover {
   transition: transform 0.2s;
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .card-link:hover {
@@ -24,3 +24,14 @@
   background-color: #343a40;
 }
 
+.modal.show {
+  outline: 3px solid blue !important;
+}
+
+.modal-backdrop.show {
+  outline: 3px solid red !important;
+}
+
+.h1 {
+  user-select: none;
+}
