@@ -18,7 +18,7 @@
       </h1>
       <form id="videogame-form"
         th:action="${edit} ? @{/videogames/edit/{id}(id=${videogame.id})} : @{/videogames/create}"
-        th:object="${videogame}" method="post">
+        th:object="${videogame}" method="post" enctype="multipart/form-data">
 
         <div class="mb-2">
           <label class="form-label fw-bold" for="name">Nome</label>
@@ -29,7 +29,10 @@
             </ul>
           </div>
         </div>
-
+        <!-- <div class="mb-2">
+          <label class="form-label" for="image">Immagine</label>
+          <input class="form-control" type="file" id="image" name="image" accept="image/*">
+        </div> -->
         <div class="mb-2">
           <label class="form-label fw-bold" for="description">Descrizione</label>
           <textarea class="form-control" id="description" th:field="*{description}"
