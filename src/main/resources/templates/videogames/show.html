@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="~{fragments/style :: head-styles}"></th:block>
     <title>Document</title>
 </head>
+
 <body class="bg-secondary">
     <header>
         <th:block th:replace="~{fragments/navbar :: navbar(platforms=${platforms})}"></th:block>
@@ -14,17 +16,19 @@
         <div class="container" th:object="${videogame}">
             <div class="row" th:object="${videogame}">
                 <h1 class="text-center my-3">[[*{name}]]</h1>
-                <img class="fixed-img-show" th:src="@{/images/{img}(img=*{image})}" alt="">
+                <img class="fixed-img-show" th:src="@{/img/{img}(img=*{image})}" alt="">
                 <p class="my-3">[[*{description}]]</p>
                 <p><strong>Data di pubblicazione:</strong> [[*{publicationDate}]]</p>
             </div>
             <h3>Piattaforme supportate</h3>
-             <ul th:each="platform : *{platforms}">
+            <ul th:each="platform : *{platforms}">
                 <li th:text="${platform.name}"></li>
             </ul>
-            <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-outline-dark')}"></th:block>
+            <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-dark')}">
+            </th:block>
         </div>
     </main>
-    
+
 </body>
+
 </html>

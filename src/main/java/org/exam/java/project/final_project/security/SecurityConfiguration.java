@@ -15,41 +15,41 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    
+
     @Bean
     @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-        .requestMatchers("/videogames/create", "/videogames/edit/**").hasAnyAuthority("ADMIN", "USER")
-        .requestMatchers(HttpMethod.POST, "videogames/**").hasAuthority("ADMIN")
-        .requestMatchers("/platforms", "/platforms/**").hasAnyAuthority("ADMIN", "USER")
-        .requestMatchers("/videogames", "/videogames/**").hasAnyAuthority("USER", "ADMIN")
-        .requestMatchers("/**").permitAll()
-        .and().formLogin()
-        .and().logout()
-        .and().exceptionHandling();
+                .requestMatchers("/videogames/create", "/videogames/edit/**").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers(HttpMethod.POST, "videogames/**").hasAuthority("ADMIN")
+                .requestMatchers("/platforms", "/platforms/**").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers("/videogames", "/videogames/**").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/**").permitAll()
+                .and().formLogin()
+                .and().logout()
+                .and().exceptionHandling();
         return http.build();
 
     }
 
-@Bean
-@SuppressWarnings("deprecation")
-DaoAuthenticationProvider authenticationProvider(){
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+    @Bean
+    @SuppressWarnings("deprecation")
+    DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-    authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService());
 
-    authProvider.setPasswordEncoder(passwordEncoder());
-    return authProvider;
-}
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
-@Bean
-DatabaseUserDetailsService userDetailsService() {
-    return new DatabaseUserDetailsService();
-}
+    @Bean
+    DatabaseUserDetailsService userDetailsService() {
+        return new DatabaseUserDetailsService();
+    }
 
-@Bean
-PasswordEncoder passwordEncoder() {
-    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-}
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }
