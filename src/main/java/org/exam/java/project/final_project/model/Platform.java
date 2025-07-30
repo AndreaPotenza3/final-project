@@ -2,7 +2,6 @@ package org.exam.java.project.final_project.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -26,7 +25,6 @@ public class Platform {
     @Column(name = "name")
     private String name;
 
-    // @JsonBackReference
     @JsonIgnoreProperties("platforms")
     @ManyToMany(mappedBy = "platforms")
     private List<Videogame> videogames;
