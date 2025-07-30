@@ -1,7 +1,5 @@
 package org.exam.java.project.final_project.security;
 
-import java.beans.JavaBean;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
