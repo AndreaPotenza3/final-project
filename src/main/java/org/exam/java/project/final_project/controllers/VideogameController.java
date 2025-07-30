@@ -67,16 +67,6 @@ public class VideogameController {
         return "videogames/create-or-edit";
     }
 
-    // @PostMapping("/create")
-    // public String store(@Valid @ModelAttribute("videogame") Videogame
-    // formVideogame, BindingResult bindingResult,
-    // Model model) {
-    // if (bindingResult.hasErrors()) {
-    // return "videogames/create-or-edit";
-    // }
-    // videogameService.create(formVideogame);
-    // return "redirect:/videogames";
-    // }
     @PostMapping("/create")
     public String store(
             @Valid @ModelAttribute("videogame") Videogame formVideogame,
