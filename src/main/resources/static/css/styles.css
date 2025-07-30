@@ -17,6 +17,10 @@
 
 .card-link:hover {
   transition: transform 0.2s;
-  transform: scale(1.025);
+  transform: scale(1.01);
+}
+
+.bg-newdark {
+  background-color: #343a40;
 }
 

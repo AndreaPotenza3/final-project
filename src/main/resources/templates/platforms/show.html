@@ -18,10 +18,10 @@
             
                 <div class="col-4 card-link" th:each="videogame : ${videogames}" th:if="${videogames.size() > 0}">
                     <a th:href="@{/videogames/{id}(id=${videogame.id})}" class="text-decoration-none text-dark">
-                            <div class="card h-100 p-0 bg-secondary" >
+                            <div class="card h-100 p-0 bg-newdark border-0" >
                                     <img th:src="@{/images/{img}(img=${videogame.image})}" class="card-img-top fixed-img" alt="...">
                                 <div class="card-body card-body-new">
-                                    <h5 class="card-title mt-auto" th:text="${videogame.name}"></h5>
+                                    <h5 class="card-title mt-auto text-white" th:text="${videogame.name}"></h5>
                                     <!-- <ul class="list-group list-group-horizontal flex-wrap">
                                         <li class="list-group-item " th:each="platform : ${videogame.platforms}" th:text="${platform.name}"></li>
                                     </ul> -->
@@ -32,9 +32,9 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                        </a>
-                        <p class="text-center fs-3 mt-5" th:text="'Non ci sono giochi disponibili per questa piattaforma!'" th:unless="${videogames.size() > 0}"></p>
+                    </a>
+                </div>
+                <p class="text-center fs-3 mt-5" th:text="'Non ci sono giochi disponibili per questa piattaforma!'" th:unless="${videogames.size() > 0}"></p>
             </div>
         </div>
     </main>

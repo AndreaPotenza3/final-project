@@ -22,7 +22,7 @@
              <ul th:each="platform : *{platforms}">
                 <li th:text="${platform.name}"></li>
             </ul>
-            <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-primary')}"></th:block>
+            <th:block th:replace="~{fragments/buttons :: button('Torna alla lista', @{/videogames}, 'btn btn-outline-dark')}"></th:block>
         </div>
     </main>
     
